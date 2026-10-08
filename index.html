@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f3ee">
+<title>Eto Photos</title>
+<link rel="icon" href="data:,">
+<style>
+:root{--bg:#f6f3ee;--card:#fff;--txt:#1d1e22;--mut:#80796d;--acc:#d9651a;--soft:#d9651a1c;--line:#e8e1d5;--sh:0 12px 32px -14px #3a2a1240;--heart:#e5384f}
+[data-t=dark]{--bg:#0f1014;--card:#1a1c23;--txt:#f2efe9;--mut:#a29d92;--acc:#ffa24a;--soft:#ffa24a22;--line:#2a2c35;--sh:0 12px 32px -14px #000a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:system-ui,"Segoe UI",Tahoma,sans-serif;-webkit-tap-highlight-color:transparent;transition:background .4s,color .4s}
+.ic{width:22px;height:22px;display:block;flex:none}
+button{font:inherit;color:inherit}
+header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding-top:env(safe-area-inset-top)}
+.bar{max-width:1400px;margin:auto;display:flex;align-items:center;gap:12px;padding:10px 16px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;white-space:nowrap;cursor:pointer;min-width:0}
+.brand img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid var(--acc);animation:pop .6s both}
+.brand span{overflow:hidden;text-overflow:ellipsis;max-width:42vw}
+.sb{position:relative;flex:1;min-width:0}
+.sb .ic{position:absolute;inset-inline-start:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;color:var(--mut);pointer-events:none}
+#q{width:100%;padding:12px 16px;padding-inline-start:42px;border-radius:99px;border:1px solid var(--line);background:var(--card);color:var(--txt);font-size:1rem;outline:none;transition:.25s}
+#q:focus{border-color:var(--acc);box-shadow:0 0 0 4px var(--soft)}
+main{max-width:1400px;margin:auto;padding:14px 16px 130px;min-height:80vh}
+main.enter>*{animation:fade .45s both}
+.tb{display:flex;align-items:center;gap:10px;margin:4px 0 16px}
+.tb h2{margin:0;font-size:1.3rem;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tb .n{color:var(--mut);font-size:.9rem}
+.rb{display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--card);cursor:pointer;transition:.2s}
+.rb:active{transform:scale(.9)}
+.rb .ic{width:20px;height:20px}
+.rb.flip .ic{transform:scaleY(-1)}
+.cats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.cat{position:relative;aspect-ratio:3/4;border-radius:var(--r);overflow:hidden;cursor:pointer;background:var(--line);box-shadow:var(--sh);animation:rise .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(min(var(--i),12)*60ms);transition:transform .35s}
+.cat:hover{transform:translateY(-6px)}
+.cat:active{transform:scale(.97)}
+.cat img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.8,.2,1),opacity .6s;opacity:0}
+.cat.ld img{opacity:1}
+.cat:hover img{transform:scale(1.08)}
+.cat .t{position:absolute;inset:auto 0 0 0;padding:60px 16px 16px;color:#fff;background:linear-gradient(transparent,#000c);font-size:1.1rem;font-weight:800}
+.cat .t small{display:flex;align-items:center;gap:6px;font-weight:500;font-size:.82rem;opacity:.85;margin-top:4px}
+.cat .t small .ic{width:14px;height:14px}
+.gh{display:flex;align-items:center;gap:10px;margin:22px 4px 12px;font-size:.95rem;color:var(--mut);font-weight:700}
+.gh::after{content:"";flex:1;height:1px;background:var(--line)}
+.gh b{background:var(--soft);color:var(--acc);border-radius:99px;padding:1px 10px;font-size:.78rem}
+.mas{columns:2;column-gap:12px}
+.ph{break-inside:avoid;margin-bottom:12px;background:var(--card);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);border:1px solid var(--line);cursor:pointer;animation:rise .6s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(min(var(--i),14)*45ms);transition:transform .3s}
+.ph:hover{transform:translateY(-4px)}
+.ph:active{transform:scale(.98)}
+.ph .im{position:relative;min-height:150px;background:linear-gradient(100deg,var(--line) 30%,color-mix(in srgb,var(--line) 50%,var(--card)) 50%,var(--line) 70%);background-size:300% 100%;animation:sh 1.4s linear infinite}
+.ph .im.ld{min-height:0;animation:none;background:none}
+.ph img{width:100%;height:auto;display:block;opacity:0;transform:scale(1.04);transition:opacity .6s,transform .8s}
+.ph .im.ld img{opacity:1;transform:none}
+.fv{position:absolute;top:8px;inset-inline-start:8px;width:36px;height:36px;border-radius:50%;border:0;background:#0006;color:#fff;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.2s}
+.fv .ic{width:18px;height:18px}
+.fv.on{color:var(--heart)}.fv.on .ic{fill:currentColor;animation:pop .4s}
+.ph .i{padding:12px 14px 14px}
+.ph h3{margin:0;font-size:.98rem;line-height:1.4}
+.ph .m{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-top:8px;color:var(--mut);font-size:.78rem}
+.ph .m span{display:flex;align-items:center;gap:4px}
+.ph .m .ic{width:13px;height:13px}
+.tag{background:var(--soft);color:var(--acc);padding:2px 10px;border-radius:99px;font-weight:700}
+.empty{display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--mut);padding:80px 0;animation:fade .5s both}
+.empty .ic{width:46px;height:46px;opacity:.6}
+nav{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:15;display:flex;gap:2px;padding:6px;border-radius:30px;background:color-mix(in srgb,var(--card) 82%,transparent);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--line);box-shadow:var(--sh);animation:up .7s .2s cubic-bezier(.2,.8,.2,1) both}
+nav button{display:flex;flex-direction:column;align-items:center;gap:3px;width:70px;padding:9px 0 8px;border:0;border-radius:24px;background:none;color:var(--mut);font-size:.68rem;font-weight:700;cursor:pointer;transition:.3s}
+nav button.on{background:var(--soft);color:var(--acc)}
+nav button:active{transform:scale(.9)}
+nav button.on .ic{animation:pop .4s}
+.lb{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;background:#07070a;color:#fff;visibility:hidden;opacity:0;transition:opacity .3s,visibility .3s}
+.lb.on{visibility:visible;opacity:1}
+.lt{display:flex;align-items:center;justify-content:space-between;padding:calc(10px + env(safe-area-inset-top)) 14px 6px}
+.lt span{color:#bbb;font-size:.9rem}
+.lb .rb{background:#ffffff14;border-color:#ffffff22;color:#fff}
+#st{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;touch-action:none;position:relative;overflow:hidden}
+#li{max-width:100%;max-height:100%;object-fit:contain;user-select:none;-webkit-user-drag:none;transition:transform .25s}
+#li.l{animation:inl .35s both}#li.r{animation:inr .35s both}
+.lnav{position:absolute;top:50%;transform:translateY(-50%);display:none}
+.lnav.p{right:14px}.lnav.x{left:14px}
+@media(hover:hover) and (min-width:700px){.lnav{display:flex}}
+.lf{background:#14151b;border-radius:26px 26px 0 0;padding:18px 20px calc(18px + env(safe-area-inset-bottom));transform:translateY(0);animation:none}
+.lb.on .lf{animation:upf .5s .1s cubic-bezier(.2,.8,.2,1) both}
+.lf h2{margin:0 0 10px;font-size:1.15rem}
+.ch{display:flex;flex-wrap:wrap;gap:8px}
+.ch span{display:flex;align-items:center;gap:6px;background:#ffffff12;border-radius:99px;padding:5px 12px;font-size:.8rem;color:#ddd}
+.ch .ic{width:14px;height:14px}
+.ac{display:flex;gap:10px;margin-top:14px}
+.ac button,.ac a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:16px;border:0;background:#ffffff14;color:#fff;font-size:.9rem;font-weight:700;cursor:pointer;text-decoration:none;transition:.2s}
+.ac button:active,.ac a:active{transform:scale(.95)}
+.ac .on{color:var(--heart)}.ac .on .ic{fill:currentColor}
+.ac .main{background:var(--acc);color:#111}
+#toast{position:fixed;bottom:calc(100px + env(safe-area-inset-bottom));left:50%;transform:translate(-50%,20px);background:#111d;color:#fff;padding:10px 20px;border-radius:99px;font-size:.88rem;opacity:0;pointer-events:none;transition:.3s;z-index:40}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+@keyframes rise{from{opacity:0;transform:translateY(26px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes up{from{opacity:0;transform:translate(-50%,40px)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes upf{from{transform:translateY(100%)}to{transform:none}}
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes sh{to{background-position:-300% 0}}
+@keyframes inl{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:none}}
+@keyframes inr{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:none}}
+@media(min-width:700px){.cats{grid-template-columns:repeat(3,1fr);gap:18px}.mas{columns:3;column-gap:16px}.ph{margin-bottom:16px}.lf{max-width:640px;margin:0 auto;width:100%}}
+@media(min-width:1000px){.cats{grid-template-columns:repeat(4,1fr)}.mas{columns:4}}
+@media(min-width:1350px){.mas{columns:5}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<header><div class="bar">
+  <div class="brand" id="brand"><span id="bn">Eto Photos</span></div>
+  <div class="sb"><i data-ic="search"></i><input id="q" type="search" placeholder="ابحث عن صورة أو قسم" enterkeyhint="search"></div>
+</div></header>
+<main id="main" class="enter"></main>
+<nav>
+  <button data-go="home"><i data-ic="grid"></i>الأقسام</button>
+  <button data-go="all"><i data-ic="image"></i>الصور</button>
+  <button data-go="fav"><i data-ic="heart"></i>المفضلة</button>
+  <button id="theme"><i id="themeic"></i>الوضع</button>
+</nav>
+<div class="lb" id="lb">
+  <div class="lt"><button class="rb" id="lx" aria-label="إغلاق"><i data-ic="close"></i></button><span id="lc"></span></div>
+  <div id="st"><img id="li" alt="" draggable="false">
+    <button class="rb lnav p" id="lp" aria-label="السابق"><i data-ic="right"></i></button>
+    <button class="rb lnav x" id="ln" aria-label="التالي"><i data-ic="left"></i></button>
+  </div>
+  <div class="lf"><h2 id="lt"></h2><div class="ch" id="lch"></div>
+    <div class="ac"><button id="lfv"><i data-ic="heart"></i><b>مفضلة</b></button><button id="lsh"><i data-ic="share"></i>مشاركة</button><a id="ldl" class="main" target="_blank" rel="noopener" download><i data-ic="download"></i>تحميل</a></div>
+  </div>
+</div>
+<div id="toast"></div>
+<script>
+const OWNER = "EngMohammedSaad";
+const REPO  = "Photos";
+const $ = id => document.getElementById(id);
+const IMG = /\.(jpe?g|png|gif|webp|avif)$/i;
+const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmtDate = d => d ? new Date(d).toLocaleDateString("ar-EG",{year:"numeric",month:"long",day:"numeric"}) : "";
+const fmtSize = b => b>1048576 ? (b/1048576).toFixed(1)+" MB" : Math.round(b/1024)+" KB";
+function parseLabel(l){ try{ const o = JSON.parse(l); if(o && typeof o==="object") return {t:o.t||"", d:o.d||""}; }catch(e){} return {t:(l||"").trim(), d:""}; }
+const P = {
+  grid:'<path d="M4 4h6.5v6.5H4zM13.5 4H20v6.5h-6.5zM4 13.5h6.5V20H4zM13.5 13.5H20V20h-6.5z"/>',
+  image:'<rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="9" cy="9" r="1.8"/><path d="M21 15.5l-5-5L5.5 21"/>',
+  heart:'<path d="M12 20.5s-7.5-4.7-9.6-9.4A5.4 5.4 0 0 1 12 6.4a5.4 5.4 0 0 1 9.6 4.7c-2.1 4.7-9.6 9.4-9.6 9.4z"/>',
+  moon:'<path d="M20.5 13.2A8.5 8.5 0 1 1 10.8 3.5a6.8 6.8 0 0 0 9.7 9.7z"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="M20.5 20.5L16 16"/>',
+  share:'<path d="M4 12v7a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 20 19v-7M16 6.5L12 2.5l-4 4M12 2.5v13"/>',
+  download:'<path d="M12 3.5v12M7 10.5l5 5 5-5M4.5 20.5h15"/>',
+  close:'<path d="M6 6l12 12M18 6L6 18"/>',
+  left:'<path d="M15 5.5L8.5 12 15 18.5"/>',
+  right:'<path d="M9 5.5l6.5 6.5L9 18.5"/>',
+  back:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+  sort:'<path d="M7 4v16M3 16l4 4 4-4M17 20V4M13 8l4-4 4 4"/>',
+  cal:'<rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+  tag:'<path d="M3.5 12.2V4.5a1 1 0 0 1 1-1h7.7L21 12.3l-8.7 8.7z"/><circle cx="8" cy="8" r="1.3"/>',
+  file:'<path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/>',
+  size:'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>'
+};
+const ic = (n,c="") => `<svg class="ic ${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n]}</svg>`;
+const fillIcons = (root=document) => root.querySelectorAll("[data-ic]").forEach(e=>{ e.outerHTML = ic(e.dataset.ic); });
+fillIcons();
+let albums = [], cur = [], idx = 0, desc = true;
+let fav = new Set(JSON.parse(localStorage.getItem("eto_fav") || "[]"));
+const saveFav = () => localStorage.setItem("eto_fav", JSON.stringify([...fav]));
+const all = () => albums.flatMap(a=>a.photos);
+function toast(t){ const e = $("toast"); e.textContent = t; e.classList.add("on"); clearTimeout(toast.t); toast.t = setTimeout(()=>e.classList.remove("on"),2200); }
+function setTheme(t){
+  document.documentElement.dataset.t = t; localStorage.setItem("eto_theme", t);
+  $("themeic").outerHTML = ic(t==="dark" ? "sun" : "moon").replace("<svg",'<svg id="themeic"');
+  document.querySelector('meta[name=theme-color]').content = t==="dark" ? "#0f1014" : "#f6f3ee";
+}
+setTheme(localStorage.getItem("eto_theme") || "light");
+$("theme").onclick = () => setTheme(document.documentElement.dataset.t==="dark" ? "light" : "dark");
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{ $("q").value = ""; const g = b.dataset.go; if(location.hash.slice(1)===(g==="home"?"":g)) render(); else location.hash = g==="home" ? "" : g; });
+$("brand").onclick = () => { $("q").value = ""; location.hash = ""; render(); };
+function skeleton(){ $("main").innerHTML = `<div class="cats">${Array.from({length:6},()=>`<div class="cat"></div>`).join("")}</div>`; }
+skeleton();
+async function load(){
+  try{
+    const r = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/releases?per_page=100`);
+    if(!r.ok) throw new Error(r.status);
+    const rels = (await r.json()).filter(x=>!x.draft);
+    const pr = rels.find(x=>x.tag_name==="_profile");
+    if(pr){
+      try{ const n = JSON.parse(pr.body||"{}").name; if(n){ $("bn").textContent = n; document.title = n + " - Photos"; } }catch(e){}
+      const av = pr.assets.filter(a=>/^avatar/i.test(a.name)).pop();
+      if(av) $("brand").insertAdjacentHTML("afterbegin", `<img src="${av.browser_download_url}" alt="">`);
+    }
+    albums = rels.filter(x=>x.tag_name!=="_profile").map(x=>{
+      const name = x.name || x.tag_name;
+      const photos = x.assets.filter(a=>IMG.test(a.name)).map(a=>{
+        const l = parseLabel(a.label);
+        return { url:a.browser_download_url, cat:name, tag:x.tag_name, title:l.t, date: l.d ? l.d+"T12:00:00" : a.created_at, size:a.size };
+      });
+      return { tag:x.tag_name, name, photos };
+    }).filter(a=>a.photos.length);
+    render();
+  }catch(e){ $("main").innerHTML = `<div class="empty">${ic("image")}حصلت مشكلة في تحميل الصور (${esc(e.message)})</div>`; }
+}
+function parseHash(){
+  const h = decodeURIComponent(location.hash.slice(1));
+  if(h==="all" || h==="fav") return { v:h };
+  if(h.startsWith("c/")) return { v:"cat", tag:h.slice(2) };
+  return { v:"home" };
+}
+function setNav(v){ document.querySelectorAll("[data-go]").forEach(b=>b.classList.toggle("on", b.dataset.go===v)); }
+const imgLd = 'onload="this.parentNode.classList.add(\'ld\')" onerror="this.parentNode.classList.add(\'ld\')"';
+function render(){
+  const q = $("q").value.trim().toLowerCase(), r = parseHash(), m = $("main");
+  m.classList.remove("enter"); void m.offsetWidth; m.classList.add("enter");
+  if(!albums.length){ m.innerHTML = `<div class="empty">${ic("image")}لسه مفيش صور</div>`; return; }
+  setNav(q ? "" : r.v==="cat" ? "home" : r.v);
+  if(q) return photos(all().filter(p=>(p.title+" "+p.cat).toLowerCase().includes(q)), "نتائج البحث", false);
+  if(r.v==="all") return photos(all(), "كل الصور", false);
+  if(r.v==="fav") return photos(all().filter(p=>fav.has(p.url)), "المفضلة", false, "heart", "لسه مضفتش صور للمفضلة");
+  if(r.v==="cat"){ const a = albums.find(x=>x.tag===r.tag); if(a) return photos(a.photos, a.name, true); }
+  m.innerHTML = `<div class="cats">${albums.map((a,i)=>{
+    const cover = [...a.photos].sort((x,y)=>new Date(y.date)-new Date(x.date))[0];
+    return `<div class="cat" style="--i:${i}" data-tag="${esc(a.tag)}"><img src="${cover.url}" loading="lazy" alt="" ${imgLd}><div class="t">${esc(a.name)}<small>${ic("image")}${a.photos.length} صورة</small></div></div>`;
+  }).join("")}</div>`;
+  window.scrollTo(0,0);
+}
+function photos(list, title, back, emptyIc="image", emptyMsg="مفيش نتايج"){
+  list = [...list].sort((a,b)=> desc ? new Date(b.date)-new Date(a.date) : new Date(a.date)-new Date(b.date));
+  const head = `<div class="tb">${back?`<button class="rb" data-act="back" aria-label="رجوع">${ic("back")}</button>`:""}<h2>${esc(title)}</h2><span class="n">${list.length}</span>${list.length>1?`<button class="rb ${desc?"":"flip"}" data-act="sort" aria-label="ترتيب">${ic("sort")}</button>`:""}</div>`;
+  if(!list.length){ $("main").innerHTML = head + `<div class="empty">${ic(emptyIc)}${emptyMsg}</div>`; return; }
+  cur = []; const g = new Map();
+  list.forEach(p=>{ const d = new Date(p.date), k = d.getFullYear()+"-"+d.getMonth();
+    if(!g.has(k)) g.set(k,{ t:d.toLocaleDateString("ar-EG",{month:"long",year:"numeric"}), a:[] }); g.get(k).a.push(p); });
+  let i = 0;
+  const body = [...g.values()].map(s=>`<section><div class="gh">${s.t}<b>${s.a.length}</b></div><div class="mas">${s.a.map(p=>{
+    cur.push(p); const n = i++;
+    return `<article class="ph" style="--i:${n}" data-i="${n}"><div class="im"><img src="${p.url}" loading="lazy" alt="${esc(p.title)}" ${imgLd}><button class="fv ${fav.has(p.url)?"on":""}" data-fv="${n}" aria-label="مفضلة">${ic("heart")}</button></div><div class="i"><h3>${esc(p.title||"بدون عنوان")}</h3><div class="m"><span class="tag">${esc(p.cat)}</span><span>${ic("cal")}${fmtDate(p.date)}</span></div></div></article>`;
+  }).join("")}</div></section>`).join("");
+  $("main").innerHTML = head + body;
+  window.scrollTo(0,0);
+}
+
+$("main").onclick = e => {
+  const a = e.target.closest("[data-act]");
+  if(a){ if(a.dataset.act==="back") location.hash = ""; else { desc = !desc; render(); } return; }
+  const f = e.target.closest(".fv");
+  if(f){ e.stopPropagation(); toggleFav(cur[+f.dataset.fv]); const on = fav.has(cur[+f.dataset.fv].url); f.classList.toggle("on", on); if(parseHash().v==="fav" && !on && !$("q").value) render(); return; }
+  const p = e.target.closest(".ph"); if(p){ openLb(+p.dataset.i); return; }
+  const c = e.target.closest(".cat[data-tag]"); if(c) location.hash = "c/" + encodeURIComponent(c.dataset.tag);
+};
+$("q").oninput = render;
+window.onhashchange = () => { closeLb(); render(); };
+
+function toggleFav(p){ if(fav.has(p.url)){ fav.delete(p.url); toast("اتشالت من المفضلة"); } else { fav.add(p.url); toast("اتضافت للمفضلة"); } saveFav(); }
+const li = $("li");
+function chip(n,t){ return `<span>${ic(n)}${esc(t)}</span>`; }
+function showLb(dir){
+  const p = cur[idx];
+  li.classList.remove("l","r"); void li.offsetWidth; if(dir) li.classList.add(dir>0?"r":"l");
+  li.src = p.url; li.alt = p.title;
+  $("lc").textContent = `${idx+1} / ${cur.length}`;
+  $("lt").textContent = p.title || "بدون عنوان";
+  $("lch").innerHTML = chip("tag",p.cat) + chip("cal",fmtDate(p.date)) + chip("file",fmtSize(p.size));
+  li.onload = () => { if(li.naturalWidth) $("lch").insertAdjacentHTML("beforeend", chip("size", li.naturalWidth+" x "+li.naturalHeight)); };
+  $("ldl").href = p.url;
+  const on = fav.has(p.url); $("lfv").classList.toggle("on", on); $("lfv").querySelector("b").textContent = on ? "في المفضلة" : "مفضلة";
+  [idx-1, idx+1].forEach(j=>{ const q = cur[(j+cur.length)%cur.length]; if(q) new Image().src = q.url; });
+}
+function openLb(i){ idx = (i+cur.length)%cur.length; $("lb").classList.add("on"); document.body.style.overflow = "hidden"; showLb(0); }
+function closeLb(){ if(!$("lb").classList.contains("on")) return; $("lb").classList.remove("on"); document.body.style.overflow = ""; const v = parseHash().v; if(v==="fav" && !$("q").value) render(); }
+const go = d => { idx = (idx+d+cur.length)%cur.length; showLb(d); };
+$("lx").onclick = closeLb; $("lp").onclick = () => go(-1); $("ln").onclick = () => go(1);
+$("lfv").onclick = () => { const p = cur[idx]; toggleFav(p); const on = fav.has(p.url); $("lfv").classList.toggle("on", on); $("lfv").querySelector("b").textContent = on ? "في المفضلة" : "مفضلة";
+  const c = document.querySelector(`.fv[data-fv="${idx}"]`); if(c) c.classList.toggle("on", on); };
+$("lsh").onclick = async () => { const p = cur[idx]; try{ if(navigator.share){ await navigator.share({ title:p.title||"صورة", text:p.cat, url:p.url }); } else { await navigator.clipboard.writeText(p.url); toast("اتنسخ رابط الصورة"); } }catch(e){} };
+document.onkeydown = e => { if(!$("lb").classList.contains("on")) return;
+  if(e.key==="Escape") closeLb(); if(e.key==="ArrowLeft") go(1); if(e.key==="ArrowRight") go(-1); };
+let sx=0, sy=0, dx=0, dy=0, drag=false;
+const st = $("st");
+st.onpointerdown = e => { if(e.target.closest("button")) return; drag = true; sx = e.clientX; sy = e.clientY; dx = dy = 0; li.style.transition = "none"; st.setPointerCapture(e.pointerId); };
+st.onpointermove = e => { if(!drag) return; dx = e.clientX-sx; dy = e.clientY-sy; li.style.transform = `translate(${dx}px,${Math.max(dy,0)}px) scale(${1-Math.min(Math.max(dy,0)/900,.2)})`; };
+st.onpointerup = st.onpointercancel = () => { if(!drag) return; drag = false; li.style.transition = ""; li.style.transform = "";
+  if(Math.abs(dx)>60 && Math.abs(dx)>Math.abs(dy)) go(dx<0 ? 1 : -1); else if(dy>110) closeLb(); };
+st.onclick = e => { if(e.target===st && Math.abs(dx)<5 && Math.abs(dy)<5) closeLb(); };
+load();
+</script>
+</body>
+</html>
